@@ -7,11 +7,17 @@ Gem::Specification.new do |s|
   s.version     = Netstring::VERSION
   s.authors     = ["Kurtis Rainbolt-Greene"]
   s.email       = ["kurtisrainboltgreene@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.homepage    = "http://krainboltgreene.github.com/netstring"
+  s.summary     = %q{A parser for the TNetstring protocol.}
+  s.description = %q{
+    Netstring is a parser for the TNetstring protocol.
+    The TNetstring protocol is a serialized data structure.
+  }
 
-  s.rubyforge_project = "netstring"
+  s.add_dependency("json")
+  s.add_dependency("yaml")
+
+  s.add_development_dependency("minitest")
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

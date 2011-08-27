@@ -1,5 +1,4 @@
-require "netstring/version"
+require "bundler/setup"
+Bundler.require(:default)
 
-module Netstring
-  # Your code goes here...
-end
+require "netstring/version"
