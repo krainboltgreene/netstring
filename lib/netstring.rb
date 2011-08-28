@@ -1,4 +1,6 @@
 require "bundler/setup"
 Bundler.require(:default)
 
-require "netstring/version"
+require_relative "netstring/parse"
+require_relative "netstring/error"
+require_relative "netstring/version"
