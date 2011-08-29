@@ -10,13 +10,12 @@ module Netstring
   DICT_TYPE = '\}'
   LIST_TYPE = '\]'
   TYPE = "#{STRING_TYPE}|#{INT_TYPE}|#{FLOAT_TYPE}|#{BOOLEAN_TYPE}|#{NULL_TYPE}|#{DICT_TYPE}|#{LIST_TYPE}"
-  DEFINITION = /(#{SIZE})#{COLON}(#{DATA})(#{TYPE})/
+  DEFINITION = /((#{SIZE})#{COLON}(#{DATA})(#{TYPE}))+/
 
   # => Netstring.parse(String or nil)
   #
   # This is the method that parses TNetString data.
   def self.parse(data=nil)
-
 
     # If the data passed is bad, make into empty tns:string
     data = "0:," if data == nil || data == "" || !data.is_a?(String) || data.split(":", 2).first.to_i =~ /#{SIZE}/
@@ -39,10 +38,29 @@ module Netstring
     # Check to see if the size of the body matches the byte count
     if body.length == bytes
       case terminator
-      when "," then body
+      when STRING_TYPE then body
+      when INT_TYPE then body.to_i
+      when FLOAT_TYPE then body.to_f
+      when BOOLEAN_TYPE then parse_boolean(body)
+      when NULL_TYPE then nil
+      when DICT_TYPE then parse_dictionary(body)
+      when LIST_TYPE then parse_list(body)
       end
     else
-      raise ByteLengthError
+      raise ByteLengthError, "The byte count was incorrect: #{bytes} (byte count) vs. #{body.length} (data length)"
+    end
+  end
+
+  def self.parse_boolean(data)
+    boolean_match = /\Atrue|false\Z/
+    if data =~ boolean_match
+      if data == "true"
+        true
+      else
+        false
+      end
+    else
+      raise TypeError, "Not 'true' or 'false': #{data}"
     end
   end
 
