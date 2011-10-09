@@ -1,5 +1,4 @@
-require "netstring/version"
+require 'require_relative' if RUBY_PLATFORM =~ /1\.8/
 
-module Netstring
-  # Your code goes here...
-end
+require_relative 'netstring/parse'
+require_relative 'netstring/version'
