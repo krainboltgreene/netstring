@@ -1,25 +1,22 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-require "netstring/version"
+# encoding: utf-8
+require File.expand_path('../lib/netstring/version', __FILE__)
 
-Gem::Specification.new do |s|
-  s.name        = "netstring"
-  s.version     = Netstring::VERSION
-  s.authors     = ["Kurtis Rainbolt-Greene"]
-  s.email       = ["kurtisrainboltgreene@gmail.com"]
-  s.homepage    = "http://krainboltgreene.github.com/netstring"
-  s.summary     = %q{A parser for the TNetstring protocol.}
-  s.description = %q{
-    Netstring is a parser for the TNetstring protocol.
-    The TNetstring protocol is a serialized data structure.
-  }
+Gem::Specification.new do |gem|
+  gem.authors       = ["Kurtis Rainbolt-Greene"]
+  gem.email         = ["kurtisrainboltgreene@gmail.com"]
+  gem.description   = 'A parser for the TNetstring protocol.'
+  gem.summary       = %q{}
+  gem.homepage      = 'http://krainboltgreene.github.com/netstring/'
 
-  s.add_dependency("json")
+  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename f }
+  gem.files         = `git ls-files`.split "\n"
+  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split "\n"
+  gem.name          = "netstring"
+  gem.require_paths = ["lib"]
+  gem.version       = Netstring::VERSION
 
-  s.add_development_dependency("minitest")
-
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  gem.add_development_dependency 'yard', '0.7.3'
+  gem.add_development_dependency 'kramdown', '0.13.3'
+  gem.add_development_dependency 'rake', '0.9.2.2'
+  gem.add_dependency 'yajl-ruby', '1.1.0'
 end

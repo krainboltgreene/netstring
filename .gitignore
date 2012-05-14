@@ -1,4 +1,23 @@
-*.gem
-.bundle
-Gemfile.lock
-pkg/*
+# Git Ignore
+# ==========
+# The .gitignore file is used to make the version control ignore certain
+# directories or files.
+
+# General crud
+/tmp
+
+# Bundler crud
+/pkg
+/.bundle
+/Gemfile.lock
+/*.gem
+
+# Documentation crud
+/.yardoc
+/_yardoc
+/doc
+/rdoc
+/coverage
+
+# Interpretor Crud
+*.rbc
